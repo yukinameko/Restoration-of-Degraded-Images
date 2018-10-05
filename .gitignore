@@ -1,3 +1,4 @@
 image/
 outImage/
 node_modules/
+*.pdf
