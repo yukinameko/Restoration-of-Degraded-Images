@@ -14,18 +14,22 @@ const image = cv.imread(process.argv[2], cv.CV_8UC1);
 const psf = JSON.parse(fs.readFileSync('motion.json', 'utf8'));
 
 const start = Date.now();
-const image_noise_array = image.getDataAsArray().map((v, i, a) => v.map((v, j) => {
+const image_noise_array = image.getDataAsArray().map((v, io, a) => v.map((v, jo) => {
 	var sum = 0.0;
-	const i_org = i, j_org = j;
+	var i = io - n;
 	var i_ = 0;
-	for(i-=n; i_ < N; i_++, i++){
-		var j_ = 0;
-		for(j-=n; j_ < N; j_++, j++){
-			sum += (i < 0 || i >= a.length || j < 0 || j >= a[0].length)?0:a[i][j]*psf[i_][j_];
+	while(i_<N){
+		if(!(i < 0 || i >= a.length)){
+			var j_ = 0;
+			var j = jo - n;
+			while(j_<N){
+				sum += (j < 0 || j >= a[0].length)?0:(a[i][j]*psf[i_][j_]);
+				j++; j_++;
+			}
 		}
+		i++; i_++;
 	}
-	i = i_org;
-	j = j_org;
+
 	return parseInt(sum);
 }));
 const end = Date.now();
