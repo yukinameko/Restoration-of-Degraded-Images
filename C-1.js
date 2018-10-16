@@ -5,7 +5,7 @@ const N = 11;
 const n = parseInt((N-1)/2);
 
 if(process.argv.length < 3){
-	console.log('error: not found argv1');
+	console.log('error: not found argv'+process.argv.length+'\n');
 	process.exit(1);
 }
 

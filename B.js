@@ -1,5 +1,5 @@
 if(process.argv.length < 4){
-	console.log('error: not found argv1 or argv2');
+	console.log('error: not found argv'+process.argv.length);
 	process.exit(1);
 }
 

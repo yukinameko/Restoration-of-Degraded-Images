@@ -2,7 +2,7 @@ const cv = require('opencv4nodejs');
 const fs = require('fs');
 
 if(process.argv.length < 4){
-	console.log('error: not found argv1\nnode D <image path> <psf.json path>');
+	console.log('error: not found argv'+process.argv.length+'\nnode D <image path> <psf.json path>');
 	process.exit(1);
 }
 
