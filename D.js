@@ -46,7 +46,6 @@ const img_vec = new cv.Mat([img_array_vec], cv.CV_32FC1);
 
 const P = psf2p(psf, img.sizes);
 
-// console.log(P.norm(img));
 const start = Date.now();
 const img_noise_array_vec = Array.from(new Array(img.rows*img.cols)).map((v, i) => {
 	if(i%100 == 0)console.log(i);
@@ -59,11 +58,7 @@ const img_noise_array = Array.from(new Array(img.rows)).map((v, i) => img_noise_
 
 const img_noise = new cv.Mat(img_noise_array, cv.CV_8UC1);
 
-// const im = new cv.Mat([img.getDataAsArray()[0]], cv.CV_8UC1);
-
 cv.imwrite('outImage/D.png', img_noise);
 
 cv.imshow('test', img_noise);
 cv.waitKey();
-
-// console.log(im.rows);

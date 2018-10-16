@@ -1,9 +1,6 @@
 const cv = require('opencv4nodejs');
 const fs = require('fs');
 
-const N = 11;
-const n = parseInt((N-1)/2);
-
 if(process.argv.length < 2){
 	console.log('error: not found argv'+process.argv.length);
 	process.exit(1);
@@ -12,6 +9,9 @@ if(process.argv.length < 2){
 const image = cv.imread(process.argv[2], cv.CV_8UC1);
 
 const psf = JSON.parse(fs.readFileSync('gaussian.json', 'utf8'));
+
+const N = psf.length;
+const n = parseInt((N-1)/2);
 
 const start = Date.now();
 const image_noise_array = image.getDataAsArray().map((v, io, a) => v.map((v, jo) => {
