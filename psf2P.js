@@ -1,12 +1,9 @@
-const cv = require('opencv4nodejs');
-
 exports.psf2P = function(psf, sizes){
 	const start = Date.now();
 	const rows = sizes[0];
 	const cols = sizes[1];
 	const N = psf.length;
 	const n = parseInt((N-1)/2);
-	// const P = new cv.Mat(rows*cols, rows*cols, cv.CV_32FC1);
 	const P = Array.from(new Array(rows*cols)).map(v => (new Array(rows*cols)).fill(0));
 	for(var row = 0; row < rows; row++){
 		for(var col = 0; col < cols; col++){
