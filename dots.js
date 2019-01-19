@@ -4,7 +4,7 @@ exports.dots = (A, B) => {
 	function dot(A, b) {
 		const rows = b.length;
 		return Array.from(new Array(rows)).map((v, i) =>
-			A_[i].reduce((pre, cur, j) => pre+cur*b[j], 0)
+			A[i].reduce((pre, cur, j) => pre+cur*b[j], 0)
 		);
 	}
 	const A_ = math.transpose(A)
