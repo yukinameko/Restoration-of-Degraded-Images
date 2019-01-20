@@ -20,8 +20,6 @@ const out_path = argv[4];
 
 const image_array = image.getDataAsArray();
 const [Ac, Ar] = p2P.psf2P(c, r, image.sizes);
-console.log(Ac.length, Ac[0].length);
-console.log(Ar.length, Ar[0].length);
 
 const B = D.dots(D.dots(Ac, image_array), math.transpose(Ar));
 
