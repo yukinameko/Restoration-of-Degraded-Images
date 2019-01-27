@@ -9,7 +9,7 @@ const inv = require('./svd-inv').inv;
 const ps = require('./matrixParseInt.js');
 
 if(process.argv.length < 6){
-	console.log('error: not found argv'+process.argv.length+'\nnode G <input image path> <psf1.json> <psf2.json> <output image path>');
+	console.log('error: not found argv'+process.argv.length+'\nnode G <input noise image path> <psf1.json> <psf2.json> <output image path>');
 	process.exit(1);
 }
 const argv = process.argv;

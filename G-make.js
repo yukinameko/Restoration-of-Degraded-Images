@@ -6,7 +6,7 @@ const p2P = require('./psf2P_separable.js');
 const D = require('./dots.js');
 
 if(process.argv.length < 6){
-	console.log('error: not found argv'+process.argv.length+'\nnode G <input image path> <psf1.json> <psf2.json> <output image path>');
+	console.log('error: not found argv'+process.argv.length+'\nnode G-make <input image path> <psf1.json> <psf2.json> <output noise image path>');
 	process.exit(1);
 }
 const argv = process.argv;
