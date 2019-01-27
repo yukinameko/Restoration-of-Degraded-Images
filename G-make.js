@@ -16,7 +16,7 @@ const image = cv.imread(argv[2], cv.CV_8UC1);
 const c = JSON.parse(fs.readFileSync(argv[3], 'utf8'));
 const r = JSON.parse(fs.readFileSync(argv[4], 'utf8'));
 
-const out_path = argv[4];
+const out_path = argv[5];
 
 const image_array = image.getDataAsArray();
 const [Ac, Ar] = p2P.psf2P(c, r, image.sizes);
@@ -25,4 +25,4 @@ const B = D.dots(D.dots(Ac, image_array), math.transpose(Ar));
 
 const noise_image = new cv.Mat(B, cv.CV_8UC1);
 
-cv.imwrite('outImage/G-noise.png', noise_image);
+cv.imwrite(out_path, noise_image);
