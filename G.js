@@ -24,7 +24,6 @@ const image_array = image.getDataAsArray();
 const [Ac, Ar] = p2P.psf2P(c, r, image.sizes);
 const resAc = svd(Ac);
 const resAr = svd(Ar);
-// console.log(res.U.length);
 
 const B = D(D(Ac, image_array), math.transpose(Ar));
 const A = D(D(inv(resAc), B), math.transpose(inv(resAr)));
@@ -32,7 +31,6 @@ const A = D(D(inv(resAc), B), math.transpose(inv(resAr)));
 const noise_image = new cv.Mat(B, cv.CV_8UC1);
 const toeplitz_image = new cv.Mat(A, cv.CV_8UC1);
 
-cv.imshow('test', noise_image);
-cv.imshow('test', toeplitz_image);
+cv.imshow('noise', noise_image);
+cv.imshow('toeplitz', toeplitz_image);
 cv.waitKey();
-
