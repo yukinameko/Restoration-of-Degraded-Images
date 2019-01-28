@@ -7,6 +7,6 @@ exports.dots = (A, B) => {
 	}
 	const B_ = math.transpose(B)
 	if(B[0].length == undefined)
-		return dot(A, [B]); 
+		return A.map(v => dot(v, [B])); 
 	return A.map((v, i) => dot(v, B_));
 }
