@@ -2,6 +2,7 @@ const cv = require('opencv4nodejs');
 const fs = require('fs');
 const math = require('mathjs');
 const svd = require('node-svd').svd;
+const plt = require('matplotnode');
 
 const F = require('./psf2P.js');
 const tm = require('./timer.js');
@@ -46,7 +47,7 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 	let t_max = 0;
 	let psnr_max = 0;
 	let psnrs = [];
-	const ts = Array.from(new Array(10)).map((v, i) => i/10.0);
+	const ts = Array.from(new Array(20)).map((v, i) => i/20.0);
 	for(const t of ts){
 		console.log(`log:${t}`);
 		while(S[k] < t){
@@ -72,7 +73,7 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 
 		const img_org_array = Array.from(new Array(rows)).map((v, i) => img_org_array_vec.slice(i*cols, (i+1)*cols));
 		const img_org = new cv.Mat(img_org_array, cv.CV_8UC1);
-		cv.imwrite(`outImage/${out_name}-t${parseInt(t*10)}.png`, img_org);
+		cv.imwrite(`outImage/${out_name}-t${parseInt(t*100)}.png`, img_org);
 	}
 	return [ts, psnrs, t_max, psnr_max, k_max];
 });
@@ -82,3 +83,8 @@ console.log(psnrs);
 console.log(t);
 console.log(psnr);
 console.log(k);
+
+plt.xlabel("閾値");
+plt.ylabel("psnr");
+plt.plot(ts, psnrs);
+plt.show();
