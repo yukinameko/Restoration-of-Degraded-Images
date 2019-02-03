@@ -49,12 +49,11 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 	let psnrs = [];
 	const ts = Array.from(new Array(20)).map((v, i) => i/20.0);
 	for(const t of ts){
-		console.log(`log:${t}`);
 		while(S[k] < t){
 			if(k == 0)break;
 			k--;
 		};
-		console.log(k);
+		
 		res.U = res.U.map(v => v.slice(0, k));
 		res.V = res.V.slice(0, k);
 		res.S = res.S.slice(0, k);
@@ -68,23 +67,22 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 		if(psnr > psnr_max){
 			psnr_max = psnr;
 			t_max = t;
-			k_max = k;
+			k_max = k+1;
 		}
 
 		const img_org_array = Array.from(new Array(rows)).map((v, i) => img_org_array_vec.slice(i*cols, (i+1)*cols));
 		const img_org = new cv.Mat(img_org_array, cv.CV_8UC1);
 		cv.imwrite(`outImage/${out_name}-t${parseInt(t*100)}.png`, img_org);
+
+		// output log
+		console.log(`theta=${t} : psnr=${psnr}, k=${k+1}`);
 	}
 	return [ts, psnrs, t_max, psnr_max, k_max];
 });
 
-console.log(ts);
-console.log(psnrs);
-console.log(t);
-console.log(psnr);
-console.log(k);
+console.log(`max psnr\ntheta=${t} : psnr=${psnr}, k=${k}`);
 
+plt.plot(ts, psnrs);
 plt.xlabel("閾値");
 plt.ylabel("psnr");
-plt.plot(ts, psnrs);
 plt.show();

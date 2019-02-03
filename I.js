@@ -47,7 +47,6 @@ const [lambdas, psnrs, lambda, psnr] = tm.timer(() => {
 	let psnrs = [];
 	const lambdas = Array.from(new Array(20)).map((v, i) => i/20.0);
 	for(const l of lambdas){
-		console.log(`lambda:${l}`);
 		res.S = res.S.map(v => v+(l*l/v));
 
 		const P_inv = inv(res);
@@ -64,14 +63,14 @@ const [lambdas, psnrs, lambda, psnr] = tm.timer(() => {
 		const img_org_array = Array.from(new Array(rows)).map((v, i) => img_org_array_vec.slice(i*cols, (i+1)*cols));
 		const img_org = new cv.Mat(img_org_array, cv.CV_8UC1);
 		cv.imwrite(`outImage/${out_name}-t${parseInt(l*100)}.png`, img_org);
+
+		// output log
+		console.log(`lambda=${l} : psnr=${psnr}`);
 	}
 	return [lambdas, psnrs, lambda_max, psnr_max];
 });
 
-console.log(lambdas);
-console.log(psnrs);
-console.log(lambda);
-console.log(psnr);
+console.log(`max psnr\nlambda=${lambda} : psnr=${psnr}`);
 
 plt.plot(lambdas, psnrs);
 plt.xlabel("lambda");
