@@ -53,7 +53,7 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 			if(k == 0)break;
 			k--;
 		};
-		
+
 		res.U = res.U.map(v => v.slice(0, k));
 		res.V = res.V.slice(0, k);
 		res.S = res.S.slice(0, k);
@@ -83,6 +83,6 @@ const [ts, psnrs, t, psnr, k] = tm.timer(() => {
 console.log(`max psnr\ntheta=${t} : psnr=${psnr}, k=${k}`);
 
 plt.plot(ts, psnrs);
-plt.xlabel("閾値");
+plt.xlabel("theta");
 plt.ylabel("psnr");
 plt.show();

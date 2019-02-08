@@ -4,6 +4,7 @@ const math = require('mathjs');
 
 const p2P = require('./psf2P_separable.js');
 const D = require('./dots.js');
+const ps = require('./matrixParseInt.js');
 
 if(process.argv.length < 6){
 	console.log('error: not found argv'+process.argv.length+'\nnode G-make <input image path> <psf1.json> <psf2.json> <output noise image path>');
@@ -23,6 +24,6 @@ const [Ac, Ar] = p2P.psf2P(c, r, image.sizes);
 
 const B = D.dots(D.dots(Ac, image_array), math.transpose(Ar));
 
-const noise_image = new cv.Mat(B, cv.CV_8UC1);
+const noise_image = new cv.Mat(ps.parseUInt8(B), cv.CV_8UC1);
 
 cv.imwrite(out_path, noise_image);
